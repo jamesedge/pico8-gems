@@ -81,7 +81,8 @@ proj=perspective(fov)
 -- project points
 ppoints={}
 foreach(points, function(point)
-  p=m4mulv4(proj, { point[1]+xoff, point[2]+yoff, point[3], 1 }) -- to clip coordinates
+  x, y, z=point[1]+xoff, point[2]+yoff, point[3]
+  p=m4mulv4(proj, { x, y, z, 1 }) -- to clip coordinates
   p[1]/=p[4] p[2]/=p[4] p[3]/=p[4] -- perspective divide by w
   add(ppoints, { 64*p[1]+64, 64-64*p[2] }) -- screen space
 end)
